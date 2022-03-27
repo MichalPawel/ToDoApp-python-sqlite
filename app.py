@@ -1,4 +1,15 @@
 import os
+import sqlite3
+
+connection = sqlite3.connect("tasks.db")
+
+
+def create_table(connection):
+    try:
+        cur = connection.cursor()
+        cur.execute("""CREATE TABLE task(task text)""")
+    except:
+        pass
 
 
 def cls():
