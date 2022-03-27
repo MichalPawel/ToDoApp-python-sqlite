@@ -26,12 +26,16 @@ def show_tasks(connection):
         print(f'{row[0]}. {row[1]}')
 
 
-def add_task():
-    # task = input("Type task name: ")
-    # tasks.append(task)
-    # cls()
-    # print('Task added: ' + task)
-    print("add task")
+def add_task(connection):
+    task = input("Type task name: ")
+    if task == 0:
+        print("powrot do menu")
+    else:
+        cur = connection.cursor()
+        cur.execute("""INSERT INTO task(task) VALUES(?)""", (task,))
+        connection.commit()
+    cls()
+    print(f'Task added: {task}')
 
 
 def delete_task():
