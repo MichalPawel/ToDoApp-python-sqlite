@@ -61,13 +61,14 @@ def show_menu():
     user_choice = int(input("Select number: "))
 
 
+create_table(connection)
 while True:
     show_menu()
     if user_choice == 1:
-        show_tasks()
+        show_tasks(connection)
     if user_choice == 2:
-        add_task()
+        add_task(connection)
     if user_choice == 3:
-        delete_task()
+        delete_task(connection)
     if user_choice == 4:
         break
