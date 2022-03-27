@@ -38,15 +38,17 @@ def add_task(connection):
     print(f'Task added: {task}')
 
 
-def delete_task():
-    # id_to_be_deleted_plus_1 = input("Type number of task to be deleted: ")
-    # try:
-    #     cls()
-    #     print("Deleted task: " + tasks.pop(int(id_to_be_deleted_plus_1) - 1))
-    # except:
-    #     cls()
-    #     print('Oops Something went wrong. Make sure you put a correct task number')
-    print("delete task")
+def delete_task(connection):
+    id_to_be_deleted = input("Type number of task to be deleted: ")
+    cur = connection.cursor()
+    rows_deleted = cur.execute("""DELETE FROM task WHERE rowid =?""",
+                               (id_to_be_deleted,)).rowcount
+    cls()
+    if rows_deleted == 0:
+        print("Incorrect task number :(")
+    else:
+        print("task deleted")
+    connection.commit()
 
 
 def show_menu():
