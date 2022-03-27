@@ -16,16 +16,14 @@ def cls():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
-def show_tasks():
-    # task_index = 0
-    # cls()
-    # print("Current tasks: ")
-    # if len(tasks) < 1:
-    #     print("No taks")
-    # for task in tasks:
-    #     print(str(task_index + 1) + ". " + task)
-    #     task_index += 1
-    print("show tasks")
+def show_tasks(connection):
+    cur = connection.cursor()
+    cur.execute("""SELECT rowid, task FROM task""")
+    result = cur.fetchall()
+    cls()
+    print("Current tasks:")
+    for row in result:
+        print(f'{row[0]}. {row[1]}')
 
 
 def add_task():
